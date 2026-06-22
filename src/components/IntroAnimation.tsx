@@ -90,6 +90,23 @@ export default function IntroAnimation({ onEnter }: Props) {
   const startSequence = () => {
     setAudioEnabled(true);
 
+    // Mobile Audio Unlock: silently play and pause delayed audio tracks
+    // inside this user-initiated click handler so the browser allows them
+    // to play later inside setTimeouts.
+    [momAudioRef.current, coupleAudioRef.current].forEach(audio => {
+      if (audio) {
+        audio.muted = true;
+        const playPromise = audio.play();
+        if (playPromise !== undefined) {
+          playPromise.then(() => {
+            audio.pause();
+            audio.currentTime = 0;
+            audio.muted = false;
+          }).catch(() => {});
+        }
+      }
+    });
+
     // Phase 1: Dad slides in — play Batameez Dil
     setPhase('dad-in');
     dadAudioRef.current?.play().catch(() => {});
