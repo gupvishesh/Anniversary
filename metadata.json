@@ -1,0 +1,6 @@
+{
+  "name": "Anniversary Celebration",
+  "description": "A festive, warm, and bilingual interactive 22nd wedding anniversary celebration website for Tarun and Lekha.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
